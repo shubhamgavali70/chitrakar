@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Loader2, Download } from "lucide-react"
+import { Download } from "lucide-react"
 import Image from 'next/image';
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 
