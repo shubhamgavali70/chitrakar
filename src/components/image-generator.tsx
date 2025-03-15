@@ -5,9 +5,20 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
 import { Loader2, Download } from "lucide-react"
 import Image from 'next/image';
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
+
+
+const placeholders = [
+  "A painting of a beautiful sunset over the ocean",
+  "A futuristic cityscape with flying cars",
+  "A fantasy landscape with dragons and castles",
+  "A portrait of a mysterious stranger",
+  "An abstract geometric pattern",
+  "A still life of flowers in a vase",
+  "A surreal dreamlike scene",
+];
 
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState("")
@@ -16,6 +27,7 @@ export default function ImageGenerator() {
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("Called handleSubmit")
     e.preventDefault()
 
     if (!prompt.trim()) return
@@ -61,15 +73,15 @@ export default function ImageGenerator() {
 
   return (
     <div className="space-y-8">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Textarea
-          placeholder="Describe the image you want to generate..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          className="min-h-[100px]"
-          required
-        />
-        <Button type="submit" className="w-full" disabled={loading || !prompt.trim()}>
+      {/* <form onSubmit={handleSubmit} className="space-y-4"> */}
+        <div className="h-[10rem] flex flex-col justify-center  items-center px-4">
+          <PlaceholdersAndVanishInput
+            placeholders={placeholders}
+            onChange={(e) => setPrompt(e.target.value)}
+            onSubmit={handleSubmit}
+          />
+        </div>
+        {/* <Button type="submit" className="w-full" disabled={loading || !prompt.trim()}>
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -78,8 +90,8 @@ export default function ImageGenerator() {
           ) : (
             "Generate Image"
           )}
-        </Button>
-      </form>
+        </Button> */}
+      {/* </form> */}
 
       {error && <div className="p-4 bg-red-50 text-red-500 rounded-md">{error}</div>}
 
